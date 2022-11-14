@@ -9,7 +9,7 @@ window.onload = function(){
         var httpReq = new XMLHttpRequest();
         var country = document.getElementById('country').value;
         
-        var url = "world.php?country=" + country;
+        var url = "world.php?country=" + country
 
         httpReq.onreadystatechange = function(){
             if(httpReq.readyState === XMLHttpRequest.DONE){
@@ -26,5 +26,33 @@ window.onload = function(){
         httpReq.open('GET', url, true);
         httpReq.send();
         
+    });
+
+    let citybtn = document.getElementById('city');
+
+    citybtn.addEventListener("click", function(element){
+        element.preventDefault();
+
+        var httpReq = new XMLHttpRequest();
+        var country = document.getElementById('country').value;
+
+        var url = "world.php?country=" + country + "&lookup=cities"
+
+        httpReq.onreadystatechange = function(){
+            if(httpReq.readyState === XMLHttpRequest.DONE){
+                if(httpReq.status === 200){
+                    document.querySelector("#result").innerHTML = this.responseText;
+                    
+                }
+            
+                else{
+                    alert('There was a problem with the request.');
+                }
+            }
+        }
+        httpReq.open('GET', url, true);
+        httpReq.send();
+
+
     });
 }
